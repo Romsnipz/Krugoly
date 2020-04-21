@@ -21,24 +21,30 @@ public class MyView3 extends View {
     Paint paint = new Paint();
     @Override
     protected void onDraw(Canvas canvas) {
+        int R = 100;
+        int B = 150;
         if (!start) {
             for (int i = 0; i < N; i++){
                 x[i] = (float)(Math.random() * getWidth());
                 y[i] = (float)(Math.random() * getHeight());
                 vx[i] = (float)(Math.random() * 6 - 3);
                 vy[i] = (float)(Math.random() * 6 - 3);
+
+                if ((x[i] - R < 0 ||  (x[i] + R) >= canvas.getWidth()) || (y[i] - R < 0 || (y[i] + R) >= canvas.getHeight())) {
+                    i--;
+                }
             }
+
             start = true;
         }
         super.onDraw(canvas);
 
 
-    int []col = {Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.RED};
-    int R = 100;
-    int B = 160;
+        int []col = {Color.GREEN, Color.YELLOW, Color.BLUE, Color.BLACK, Color.RED, Color.GRAY, Color.DKGRAY, Color.CYAN, Color.MAGENTA, Color.LTGRAY};
+
 
         for (int i = 0; i < N; i++) {
-            paint.setColor(col[i]);
+            paint.setColor(col[i%10]);
             canvas.drawCircle(x[i], y[i], 100, paint);
         }
 
@@ -70,10 +76,10 @@ public class MyView3 extends View {
                     }
                 }
 
-                if (x[i] < 0 ||  x[i] >= canvas.getWidth()) {
+                if (x[i] - R < 0 ||  (x[i] + R) >= canvas.getWidth()) {
                     vx[i] = vx[i] * (-1);
                 }
-                else if (y[i] < 0 || y[i] >= canvas.getHeight()) {
+                else if (y[i] - R < 0 || (y[i] + R) >= canvas.getHeight()) {
                     vy[i] = vy[i] * (-1);
                 }
 
