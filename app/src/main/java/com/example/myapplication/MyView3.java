@@ -22,8 +22,6 @@ public class MyView3 extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         int R = 100;
-        int B = 165;
-//        int P = 0;
 
         if (!start) {
             for (int i = 0; i < N; i++){
@@ -59,73 +57,55 @@ public class MyView3 extends View {
         do {
             for (int i = 0; i < N; i++) {
 
-                if (x[i]-vx[i] < 0 || x[i]+vx[i] >= canvas.getWidth()) {
-                    vx[i] /=4;
-                }
-                if (y[i]-vy[i] < 0 || y[i]+vy[i] >= canvas.getHeight()) {
-                    vy[i] /=4;
-                }
-
                 x[i] += vx[i];
                 y[i] += vy[i];
 
                 invalidate();
 
-                int xr = 0;
-                int xl = 0;
-                int yu = 0;
-                int yd = 0;
-//                float XR = 0;
-//                float YR = 0;
+                float xraz = 0;
+                float yraz = 0;
+                float vxraz = 0;
+                float vyraz = 0;
 
                 for (int ip = 0; ip < N; ip++) {
                     if (ip == i) {
                         continue;
                     }
 
-//для логики сравнения с 0
-//                    xr = ((int) ((Math.abs(x[i])+R) - (Math.abs(x[ip])-R)));
-//                    xl = ((int) ((Math.abs(x[i])-R) - (Math.abs(x[ip])+R)));
-//                    yu = ((int) ((Math.abs(y[i])+R) - (Math.abs(y[ip])-R)));
-//                    yd = ((int) ((Math.abs(y[i])-R) - (Math.abs(y[ip])+R)));
-//
-//                    XR = Math.abs(Math.abs(x[i])-Math.abs(x[ip]))/2;
-//                    YR = Math.abs(Math.abs(y[i])-Math.abs(y[ip]))/2;
-//                    int D = (int)(Math.sqrt(2)*R);
-//логика сравнения с 0 (не работает (доделать))
-//                    if ((xr == P || xl == P) && (yu + yd == P) && (XR == R)) {
-//                        vx[i] = vx[i] * (-1);
-//                    }
-//                    if ((yu == P || yd == P) && (xr + xl == P) && (YR == R)) {
-//                        vy[i] = vy[i] * (-1);
-//                    }
-//                    if ((xr*xl - yu*yd == P) && ((D == XR*2) && (D == YR*2))) {
-//                        vx[i] = vx[i] * (-1);
-//                        vy[i] = vy[i] * (-1);
-//                    }
-//                    if ((xr == P || xl == P) && (((xr + (-yu+yd)) == P) || ((xl + (-yu+yd)) == P)) && (XR == R)) {
-//                        vx[i] = vx[i] * (-1) ;
-//                    }
-//                    if ((yu == P || yd == P) && (((yu + (-xr+xl)) == P) || ((yd + (-xr+xl)) == P)) && (YR == R)) {
-//                        vy[i] = vy[i] * (-1) ;
-//                    }
+                    double D = Math.sqrt(Math.pow(Math.abs(Math.abs(x[i]) - Math.abs(x[ip])),2) + Math.pow(Math.abs(Math.abs(y[i]) - Math.abs(y[ip])),2))/2;
+                    double DP = Math.sqrt(Math.pow(Math.abs(Math.abs(x[i]+vx[i]) - Math.abs(x[ip]+vx[ip])),2) + Math.pow(Math.abs(Math.abs(y[i]+vy[i]) - Math.abs(y[ip]+vy[ip])),2))/2;
+                    double Pog = Math.abs(D-DP);
 
-                    xr = Math.abs((int) (Math.abs(x[i])+R - Math.abs(x[ip])-R));
-                    xl = Math.abs((int) (Math.abs(x[i])-R - Math.abs(x[ip])+R));
-                    yu = Math.abs((int) (Math.abs(y[i])+R - Math.abs(y[ip])-R));
-                    yd = Math.abs((int) (Math.abs(y[i])-R - Math.abs(y[ip])+R));
+                    xraz = Math.abs(Math.abs(x[i]) - Math.abs(x[ip]));
+                    yraz = Math.abs(Math.abs(y[i]) - Math.abs(y[ip]));
+                    vxraz = Math.abs(Math.abs(x[i]+vx[i]) - Math.abs(x[ip]+vx[ip]));
+                    vyraz = Math.abs(Math.abs(y[i]+vy[i]) - Math.abs(y[ip]+vy[ip]));
 
-                    if ((xr <= B || xl <= B) && (yu <= B || yd <= B)) {
-                        vx[i] = vx[i] * (-1) - vy[i]/4;
-                        vy[i] = vy[i] * (-1) - vx[i]/4;
+                    if (((DP < R) || (DP < R+Pog)) && ((xraz > yraz) || (vxraz > vyraz))) {
+                        vx[i] = vx[i] * (-1) - 0.001f;
+                        continue;
                     }
+                    else if (((DP < R) || (DP < R+Pog)) && ((yraz > xraz) || (vyraz > vxraz))) {
+                        vy[i] = vy[i] * (-1) - 0.001f;
+                        continue;
+                    }
+                    else if (((DP < R) || (DP < R+Pog)) && ((yraz == xraz) || (vyraz == vxraz))) {
+                        vx[i] = vx[i] * (-1) - 0.001f;
+                        vy[i] = vy[i] * (-1) - 0.001f;
+                        continue;
+                    }
+                    else continue;
                 }
 
-                if (x[i] - R < 0 ||  (x[i] + R) >= canvas.getWidth()) {
+                if (((x[i]+vx[i]) - R < 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth()) && ((y[i]+vy[i]) - R < 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight())) {
                     vx[i] = vx[i] * (-1);
-                }
-                else if (y[i] - R < 0 || (y[i] + R) >= canvas.getHeight()) {
                     vy[i] = vy[i] * (-1);
+                }
+                else if ((x[i]+vx[i]) - R < 0 || (x[i]-vx[i]) - R < 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth() || ((x[i]-vx[i]) + R) >= canvas.getWidth()) {
+                    vx[i] = vx[i] * (-1) - 0.001f;
+                }
+                else if ((y[i]+vy[i]) - R < 0 || (y[i]-vy[i]) - R < 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight() || ((y[i]+vy[i]) + R) >= canvas.getHeight()) {
+                    vy[i] = vy[i] * (-1) - 0.001f;
                 }
             }
         } while (!start);
