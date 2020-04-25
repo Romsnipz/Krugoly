@@ -12,6 +12,8 @@ public class MyView extends View {
     float[] y  = new float[N];
     float[] vx = new float[N];
     float[] vy = new float[N];
+    float[] prevx = new float[N];
+    float[] prevy = new float[N];
 
     public MyView(Context context) {
         super(context);
@@ -109,5 +111,27 @@ public class MyView extends View {
                 }
             }
         } while (!start);
+
+    }
+    public void stopk() {
+        for (int i = 0; i < N; i++) {
+            if (vx[i] == 0 && vy[i] == 0){
+                return;
+            }
+            prevx[i] = this.vx[i];
+            this.vx[i] = 0;
+            prevy[i] = this.vy[i];
+            this.vy[i] = 0;
+        }
+    }
+
+    public void resumk() {
+        for (int i = 0; i < N; i++) {
+        if (((prevx[i] == 0) || (vx[i] != 0)) && ((prevy[i] == 0) || (vy[i] != 0))){
+            return;
+        }
+        this.vx[i] = prevx[i];
+        this.vy[i] = prevy[i];
+        }
     }
 }

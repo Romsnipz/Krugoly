@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">КЕКЕША</string>
     <string name="moving">ПУСК_ШАРОВ</string>
+    <string name="stoping">СТОП_ШАРОВ</string>
 </resources>

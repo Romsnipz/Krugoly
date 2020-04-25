@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    MyView view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +30,26 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.action_settings1:
-                setContentView(new MyView(this));
+                if (view == null) {
+                    setContentView(getView());
+                } else {
+                    getView().resumk();
+                }
+                return true;
+            case R.id.action_settings2:
+                if (view != null) {
+                    getView().stopk();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public MyView getView() {
+        if (view == null) {
+            view = new MyView(this);
+        }
+        return view;
     }
 }
