@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
                     getView().stopk();
                 }
                 return true;
+            case R.id.action_settings3:
+                view = null;
+                setContentView(getView());
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
