@@ -3,6 +3,10 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     MyView view;
+    Bundle savedInstanceState;
+
+    private EditText editText;
+    private TextView textView;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
+        getShit();
     }
 
     @Override
@@ -45,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 view = null;
                 setContentView(getView());
                 return true;
+            case R.id.action_settings4:
+                view = null;
+                setContentView(R.layout.activity_main);
+                getShit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -55,5 +71,29 @@ public class MainActivity extends AppCompatActivity {
             view = new MyView(this);
         }
         return view;
+    }
+
+    private void getShit() {
+        editText = (EditText) findViewById(R.id.editText);
+        textView  = (TextView) findViewById(R.id.textView);
+        button = (Button) findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                int C;
+                String S = editText.getText().toString();
+                if (S.equals("")) {
+                    C = 5;
+                } else if (Integer.parseInt(S) > 20){
+                    C = 5;
+                } else {
+                    C = Integer.parseInt(S);
+                }
+                getView().setN(C);
+                setContentView(getView());
+            }
+        });
     }
 }

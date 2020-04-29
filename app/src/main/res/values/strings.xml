@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">КЕКШ</string>
-    <string name="moving">ПУСК_ШАРОВ</string>
-    <string name="stoping">СТОП_ШАРОВ</string>
-    <string name="returnes">ЗАНОГО</string>
+    <string name="moving">ПУСК</string>
+    <string name="stoping">СТОП</string>
+    <string name="returnes">ЗАНОВО</string>
+    <string name="tostart">В_НАЧАЛО</string>
 </resources>

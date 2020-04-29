@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.view.View;
 
 public class MyView extends View {
-    int N = 5;
+    int N;
     float[] x  = new float[N];
     float[] y  = new float[N];
     float[] vx = new float[N];
@@ -74,8 +74,8 @@ public class MyView extends View {
                         continue;
                     }
 
-                    double D = Math.sqrt(Math.pow(Math.abs(Math.abs(x[i]) - Math.abs(x[ip])),2) + Math.pow(Math.abs(Math.abs(y[i]) - Math.abs(y[ip])),2))/2;
-                    double DP = Math.sqrt(Math.pow(Math.abs(Math.abs(x[i]+vx[i]) - Math.abs(x[ip]+vx[ip])),2) + Math.pow(Math.abs(Math.abs(y[i]+vy[i]) - Math.abs(y[ip]+vy[ip])),2))/2;
+                    double D = Math.sqrt(Math.pow((x[i] - x[ip]),2) + Math.pow((y[i] - y[ip]),2))/2;
+                    double DP = Math.sqrt(Math.pow(((x[i]+vx[i]) - (x[ip]+vx[ip])),2) + Math.pow(((y[i]+vy[i]) - (y[ip]+vy[ip])),2))/2;
                     double Pog = Math.abs(D-DP);
 
                     xraz = Math.abs(Math.abs(x[i]) - Math.abs(x[ip]));
@@ -83,31 +83,31 @@ public class MyView extends View {
                     vxraz = Math.abs(Math.abs(x[i]+vx[i]) - Math.abs(x[ip]+vx[ip]));
                     vyraz = Math.abs(Math.abs(y[i]+vy[i]) - Math.abs(y[ip]+vy[ip]));
 
-                    if (((DP < R) || (DP < R+Pog)) && ((xraz > yraz) || (vxraz > vyraz))) {
-                        vx[i] = vx[i] * (-1) - 0.005f;
+                    if (((D <= R) || (DP < R+Pog)) && ((xraz > yraz) || (vxraz > vyraz))) {
+                        vx[i] = vx[i] * (-1) - 0.01f;
                         continue;
                     }
-                    else if (((DP < R) || (DP < R+Pog)) && ((yraz > xraz) || (vyraz > vxraz))) {
-                        vy[i] = vy[i] * (-1) - 0.005f;
+                    else if (((D <= R) || (DP < R+Pog)) && ((yraz > xraz) || (vyraz > vxraz))) {
+                        vy[i] = vy[i] * (-1) - 0.01f;
                         continue;
                     }
-                    else if (((DP < R) || (DP < R+Pog)) && ((yraz == xraz) || (vyraz == vxraz))) {
-                        vx[i] = vx[i] * (-1) - 0.005f;
-                        vy[i] = vy[i] * (-1) - 0.005f;
+                    else if (((D <= R) || (DP < R+Pog)) && ((yraz == xraz) || (vyraz == vxraz))) {
+                        vx[i] = vx[i] * (-1) - 0.01f;
+                        vy[i] = vy[i] * (-1) - 0.01f;
                         continue;
                     }
                     else continue;
                 }
 
-                if (((x[i]+vx[i]) - R < 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth()) && ((y[i]+vy[i]) - R < 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight())) {
-                    vx[i] = vx[i] * (-1) - 0.001f;
-                    vy[i] = vy[i] * (-1) - 0.001f;
+                if (((x[i]+vx[i]) - R <= 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth()) && ((y[i]+vy[i]) - R <= 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight())) {
+                    vx[i] = vx[i] * (-1) - 0.002f;
+                    vy[i] = vy[i] * (-1) - 0.002f;
                 }
-                else if ((x[i]+vx[i]) - R < 0 || (x[i]-vx[i]) - R < 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth() || ((x[i]-vx[i]) + R) >= canvas.getWidth()) {
-                    vx[i] = vx[i] * (-1) - 0.001f;
+                else if (x[i] - R <= 0 || (x[i]+vx[i]) - R <= 0 || (x[i]-vx[i]) - R <= 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth() || ((x[i]-vx[i]) + R) >= canvas.getWidth()) {
+                    vx[i] = vx[i] * (-1) - 0.002f;
                 }
-                else if ((y[i]+vy[i]) - R < 0 || (y[i]-vy[i]) - R < 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight() || ((y[i]+vy[i]) + R) >= canvas.getHeight()) {
-                    vy[i] = vy[i] * (-1) - 0.001f;
+                else if (y[i] - R <= 0 || (y[i]+vy[i]) - R <= 0 || (y[i]-vy[i]) - R <= 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight() || ((y[i]+vy[i]) + R) >= canvas.getHeight()) {
+                    vy[i] = vy[i] * (-1) - 0.002f;
                 }
             }
         } while (!start);
@@ -133,5 +133,15 @@ public class MyView extends View {
         this.vx[i] = prevx[i];
         this.vy[i] = prevy[i];
         }
+    }
+
+    public void setN (int n) {
+        N = n;
+        x  = new float[N];
+        y  = new float[N];
+        vx = new float[N];
+        vy = new float[N];
+        prevx = new float[N];
+        prevy = new float[N];
     }
 }
