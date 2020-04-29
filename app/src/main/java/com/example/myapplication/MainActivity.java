@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     MyView view;
     Bundle savedInstanceState;
+    int C;
 
     private EditText editText;
     private TextView textView;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.action_settings1:
                 if (view == null) {
+                    getView().setN(C);
                     setContentView(getView());
                 } else {
                     getView().resumk();
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings3:
                 view = null;
+                getView().setN(C);
                 setContentView(getView());
                 return true;
             case R.id.action_settings4:
@@ -82,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                int C;
                 String S = editText.getText().toString();
                 if (S.equals("")) {
                     C = 5;
