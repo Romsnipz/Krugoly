@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Введите количество шариков (не больше 15 ... а то размотает ... прям плохо будет)" />
+        android:text="Введите количество шариков (не больше 10 ... а то размотает ... прям плохо будет ... с 10 тоже размажет)" />
 
     <EditText
         android:id="@+id/editText"

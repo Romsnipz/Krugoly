@@ -78,25 +78,19 @@ public class MyView extends View {
                     double DP = Math.sqrt(Math.pow(((x[i]+vx[i]) - (x[ip]+vx[ip])),2) + Math.pow(((y[i]+vy[i]) - (y[ip]+vy[ip])),2))/2;
                     double Pog = (D-DP);
 
-                    xraz = Math.abs((x[i]) - (x[ip]));
-                    yraz = Math.abs((y[i]) - (y[ip]));
                     vxraz = Math.abs((x[i]+vx[i]) - (x[ip]+vx[ip]));
                     vyraz = Math.abs((y[i]+vy[i]) - (y[ip]+vy[ip]));
 
-                    if (((DP <= R) || (DP <= R+Pog)) && ((xraz > yraz) || (vxraz > vyraz))) {
-                        vx[i] = vx[i] * (-1) - 0.01f;
-                        continue;
+                    if (((DP <= R) || (DP <= R+Pog)) && (vxraz > vyraz)) {
+                        vx[i] = (vx[i]+vx[ip]) * (-1) - 0.01f;
                     }
-                    else if (((DP <= R) || (DP <= R+Pog)) && ((yraz > xraz) || (vyraz > vxraz))) {
-                        vy[i] = vy[i] * (-1) - 0.01f;
-                        continue;
+                    if (((DP <= R) || (DP <= R+Pog)) && (vyraz > vxraz)) {
+                        vy[i] = (vy[i]+vy[ip]) * (-1) - 0.01f;
                     }
-                    else if (((DP <= R) || (DP <= R+Pog)) && ((yraz == xraz) || (vyraz == vxraz))) {
+                    if (((DP <= R) || (DP <= R+Pog)) && (vyraz == vxraz)) {
                         vx[i] = vx[i] * (-1) - 0.01f;
                         vy[i] = vy[i] * (-1) - 0.01f;
-                        continue;
                     }
-                    else continue;
                 }
 
                 if (((x[i]+vx[i]) - R <= 0 || ((x[i]+vx[i]) + R) >= canvas.getWidth()) && ((y[i]+vy[i]) - R <= 0 || ((y[i]+vy[i]) + R) >= canvas.getHeight())) {

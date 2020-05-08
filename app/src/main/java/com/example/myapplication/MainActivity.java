@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 String S = editText.getText().toString();
                 if (S.equals("")) {
                     C = 5;
-                } else if (Integer.parseInt(S) > 15){
+                } else if (Integer.parseInt(S) > 10 || Integer.parseInt(S) < 1){
                     C = 5;
                 } else {
                     C = Integer.parseInt(S);
