@@ -74,8 +74,8 @@ public class MyView extends View {
                         continue;
                     }
 
-                    double D = Math.sqrt(Math.pow((x[i] - x[ip]),2) + Math.pow((y[i] - y[ip]),2))/2;
-                    double DP = Math.sqrt(Math.pow(((x[i]+vx[i]) - (x[ip]+vx[ip])),2) + Math.pow(((y[i]+vy[i]) - (y[ip]+vy[ip])),2))/2;
+                    double D = Math.sqrt(Math.pow((x[i] - x[ip]),2) + Math.pow((y[i] - y[ip]),2))/2.0f;
+                    double DP = Math.sqrt(Math.pow(((x[i]+vx[i]) - (x[ip]+vx[ip])),2) + Math.pow(((y[i]+vy[i]) - (y[ip]+vy[ip])),2))/2.0f;
                     double Pog = (D-DP);
 
                     vxraz = Math.abs((x[i]+vx[i]) - (x[ip]+vx[ip]));

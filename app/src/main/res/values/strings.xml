@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">КЕКШ</string>
+    <string name="reg_name">РЕГА</string>
     <string name="moving">ПУСК</string>
     <string name="stoping">СТОП</string>
     <string name="returnes">ЗАНОВО</string>
     <string name="tostart">В_НАЧАЛО</string>
+    <string name="toreg">В_РЕГУ</string>
+    <string name="back">НАЗАД</string>
 </resources>

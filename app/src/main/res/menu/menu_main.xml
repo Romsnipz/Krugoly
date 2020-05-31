@@ -3,25 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
     <item
         android:id="@+id/action_settings1"
         android:orderInCategory="100"
         android:title="@string/moving"
         app:showAsAction="always"/>
+
     <item
         android:id="@+id/action_settings2"
         android:orderInCategory="100"
         android:title="@string/stoping"
         app:showAsAction="always"/>
+
     <item
         android:id="@+id/action_settings3"
         android:orderInCategory="100"
         android:title="@string/returnes"
         app:showAsAction="always"/>
+
     <item
         android:id="@+id/action_settings4"
         android:orderInCategory="100"
         android:title="@string/tostart"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_settings5"
+        android:orderInCategory="100"
+        android:title="@string/toreg"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_settings6"
+        android:orderInCategory="100"
+        android:title="@string/back"
         app:showAsAction="ifRoom"/>
 
 </menu>
