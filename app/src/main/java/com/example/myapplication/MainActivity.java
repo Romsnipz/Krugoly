@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +18,13 @@ public class MainActivity extends AppCompatActivity {
     MyView view;
     Bundle savedInstanceState;
     int C;
+    boolean flag = true;
 
     private EditText editText;
     private TextView textView;
     private Button button;
+
+    private Button button5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,31 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         textView  = (TextView) findViewById(R.id.textView);
         button = (Button) findViewById(R.id.button);
+
+        button5 = (Button) findViewById(R.id.button5);
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag) {
+                    button.setVisibility(View.GONE);
+                    textView.setVisibility(View.GONE);
+                    editText.setVisibility(View.GONE);
+                    button5.setText(getResources().getString(R.string.sorry));
+                    Toast.makeText(MainActivity.this, getText(R.string.sss),
+                            Toast.LENGTH_SHORT).show();
+                    flag = false;
+                } else {
+                    button.setVisibility(View.VISIBLE);
+                    textView.setVisibility(View.VISIBLE);
+                    editText.setVisibility(View.VISIBLE);
+                    button5.setText(getResources().getString(R.string.s));
+                    Toast.makeText(MainActivity.this, getText(R.string.yyy),
+                            Toast.LENGTH_SHORT).show();
+                    flag = true;
+                }
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
 

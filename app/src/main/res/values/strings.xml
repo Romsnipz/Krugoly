@@ -7,4 +7,9 @@
     <string name="tostart">В_НАЧАЛО</string>
     <string name="toreg">В_РЕГУ</string>
     <string name="back">НАЗАД</string>
+
+    <string name="s">TACH</string>
+    <string name="sss">NOPE</string>
+    <string name="sorry">OH, GOD, SORRY ME</string>
+    <string name="yyy">YYYYh, LAaaaDNO</string>
 </resources>

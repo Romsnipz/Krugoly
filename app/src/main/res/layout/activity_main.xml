@@ -12,8 +12,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="371dp"
-        android:layout_height="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="99dp"
         android:text="Введите количество шариков (не больше 10 ... а то размотает ... прям плохо будет ... с 10 тоже размажет)"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,9 +23,9 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="141dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:ems="15"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +35,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="91dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:background="#9C85C5"
         android:drawableBottom="@android:drawable/button_onoff_indicator_on"
         android:text="ПУСК"
@@ -44,5 +44,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
+        android:text="SHIT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
